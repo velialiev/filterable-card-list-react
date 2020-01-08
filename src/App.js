@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import CardsCategory from './components/CardsCategory/CardsCategory';
+import Filters from './components/Filters/Filters';
+import { useCards } from './hooks/Cards.hook';
+import { useCategorizedCards } from './hooks/CategorizedCards.hook';
+import { useFilteredCards } from './hooks/FilteredCards.hook';
 
-function App() {
+const App = () => {
+
+  const cards = useCards();
+  const [currentFilters, setCurrentFilters] = useState({});
+  const [filteredCards] = useFilteredCards(cards, currentFilters);
+  const [categorizedCards] = useCategorizedCards(filteredCards);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Filters onFiltersChange={setCurrentFilters}/>
+      <div className="container">
+        {
+          Object.entries(categorizedCards).map(
+            ([categoryName, cards], i) =>
+              <CardsCategory key={i}
+                             categoryName={categoryName}
+                             cards={cards}/>
+          )
+        }
+      </div>
+    </>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  font-family: Tahoma, sans-serif;
+}
+
+.container {
+  width: 870px;
+  margin: 0 auto;
+}
+
+.input {
+  padding: 8px;
+}
+
+.btn {
+  cursor: pointer;
+  transition: color 250ms, background-color 250ms;
+
+  &.btn-secondary {
+    background-color: #ffffff;
+    border: 1px solid #060758;
+    color: #060758;
+    border-radius: 20px;
+    padding: 5px 80px;
+
+    &:hover {
+      background-color: #060758;
+      color: #ffffff;
+    }
+  }
+}
